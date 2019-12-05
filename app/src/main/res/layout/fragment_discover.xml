@@ -7,17 +7,17 @@
     android:orientation="vertical">
 
     <TextView
-        style="@style/HeaderText"
+        style="@style/ExchangeEditTextText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/discover" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/feedRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
         tools:itemCount="10"
         tools:listitem="@layout/item_discover_slider" />

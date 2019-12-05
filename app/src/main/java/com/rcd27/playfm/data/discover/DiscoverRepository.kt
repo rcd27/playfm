@@ -8,12 +8,12 @@ import javax.inject.Inject
 class DiscoverRepository @Inject constructor(private val api: DiscoverApi) {
 
     // TODO: попробовать запилить через Consumer. Поля в классе - ататат
-    private var currentPosts: List<FeedPost> = emptyList()
+    private var currentPosts: List<DiscoverItem> = emptyList()
 
     /**
      * Получить список постов. Если ранее они не были загружены/изменены, взять от бэк-энда.
      */
-    fun getPosts(): Single<List<FeedPost>> {
+    fun getPosts(): Single<List<DiscoverItem>> {
         return if (currentPosts.isEmpty()) {
             api.getTrending(mapOf(
                     "page" to "1",
@@ -26,7 +26,7 @@ class DiscoverRepository @Inject constructor(private val api: DiscoverApi) {
                     .flatMapObservable { response -> fromIterable(response) }
                     // Mapping JSON object to ViewObject here in order to fix API changes only
                     // in mapping functions, but whole app.
-                    .map<FeedPost>(FeedPost.fromJSON())
+                    .map<DiscoverItem>(DiscoverItem.fromJSON())
                     .toList()
                     .map { posts ->
                         currentPosts = posts
@@ -41,7 +41,7 @@ class DiscoverRepository @Inject constructor(private val api: DiscoverApi) {
      *  Сортирует ранее полученный список постов по дате: старше -> новее.
      *  Если ранее посты не были получены, [currentPosts] - пуст, получить от бэка и отсортировать.
      */
-    fun getSortedByDatePosts(): Single<List<FeedPost>> {
+    fun getSortedByDatePosts(): Single<List<DiscoverItem>> {
         return if (currentPosts.isNotEmpty()) {
             val sorted = currentPosts.sortedBy { post -> post.date }
             currentPosts = sorted
@@ -55,7 +55,7 @@ class DiscoverRepository @Inject constructor(private val api: DiscoverApi) {
      *  Сортировка постов: новее -> старше.
      *  Получить список постов от бэка, если текущий список постов пуст.
      */
-    fun getSortedByDescendingDate(): Single<List<FeedPost>> {
+    fun getSortedByDescendingDate(): Single<List<DiscoverItem>> {
         return if (currentPosts.isNotEmpty()) {
             val sorted = currentPosts.sortedByDescending { post -> post.date }
             currentPosts = sorted
@@ -68,7 +68,7 @@ class DiscoverRepository @Inject constructor(private val api: DiscoverApi) {
     /**
      * Сортировка постов по рейтингу: ниже -> выше.
      */
-    fun getSortedByRatePosts(): Single<List<FeedPost>> {
+    fun getSortedByRatePosts(): Single<List<DiscoverItem>> {
         return if (currentPosts.isNotEmpty()) {
             val sorted = currentPosts.sortedBy { post -> post.likesCount }
             currentPosts = sorted
@@ -81,7 +81,7 @@ class DiscoverRepository @Inject constructor(private val api: DiscoverApi) {
     /**
      * Сортировка постов по рейтингу: выше -> ниже.
      */
-    fun getSortedByDescendingRatePosts(): Single<List<FeedPost>> {
+    fun getSortedByDescendingRatePosts(): Single<List<DiscoverItem>> {
         return if (currentPosts.isNotEmpty()) {
             val sorted = currentPosts.sortedByDescending { post -> post.likesCount }
             currentPosts = sorted

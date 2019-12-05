@@ -5,8 +5,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.rcd27.playfm.R
-import com.rcd27.playfm.dagger.main.discover.FeedComponent
-import com.rcd27.playfm.dagger.main.discover.FeedModule
+import com.rcd27.playfm.dagger.main.discover.DiscoverComponent
+import com.rcd27.playfm.dagger.main.discover.DiscoverModule
 import com.rcd27.playfm.presentation.MainActivity
 import javax.inject.Inject
 import kotlin.properties.Delegates
@@ -20,13 +20,13 @@ class FeedFragment : Fragment(R.layout.fragment_discover) {
     @JvmField
     var presenter: FeedPresenter? = null
 
-    var feedComponent: FeedComponent by Delegates.notNull()
+    var discoverComponent: DiscoverComponent by Delegates.notNull()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        feedComponent = (activity as MainActivity)
+        discoverComponent = (activity as MainActivity)
             .activityComponent
             .plus(
-                FeedModule(
+                DiscoverModule(
                     requireView(),
                     lifecycle,
                     actionListener = { action ->
@@ -36,6 +36,6 @@ class FeedFragment : Fragment(R.layout.fragment_discover) {
                     viewStateListener = BehaviorRelay.create()
                 )
             )
-        feedComponent.inject(this)
+        discoverComponent.inject(this)
     }
 }

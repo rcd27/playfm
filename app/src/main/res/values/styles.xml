@@ -24,11 +24,6 @@
     <style name="ToolbarStyle" parent="Base.Widget.AppCompat.Light.ActionBar" />
 
     <!--Explanations-->
-    <style name="HeaderExplanationText">
-        <item name="android:textColor">@color/colorPrimaryDark</item>
-        <item name="android:textSize">14sp</item>
-    </style>
-
     <style name="ToolbarTitleText">
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textSize">18sp</item>

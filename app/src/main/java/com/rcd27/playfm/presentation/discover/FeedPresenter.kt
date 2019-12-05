@@ -3,7 +3,7 @@ package com.rcd27.playfm.presentation.discover
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-import com.rcd27.playfm.domain.feed.*
+import com.rcd27.playfm.domain.discover.*
 import com.rcd27.playfm.extensions.exhaustive
 import com.rcd27.playfm.extensions.plusAssign
 import com.rcd27.playfm.navigation.Router
@@ -11,12 +11,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-/** Presenter для экрана постов. Отвечает за фильтрацию [FeedAction] и [FeedState]. */
+/** Presenter для экрана постов. Отвечает за фильтрацию [DiscoverAction] и [FeedState]. */
 class FeedPresenter @Inject constructor(
-    lifecycle: Lifecycle,
-    private val viewBinding: FeedViewBinding,
-    private val stateMachine: FeedStateMachine,
-    private val router: Router
+        lifecycle: Lifecycle,
+        private val viewBinding: DiscoverViewBinding,
+        private val stateMachine: DiscoverStateMachine,
+        private val router: Router
 ) : LifecycleObserver {
 
     private val cd = CompositeDisposable()
@@ -32,7 +32,7 @@ class FeedPresenter @Inject constructor(
                 // TODO: handle FeedLoadError
                 .subscribe(viewBinding::render)
 
-        stateMachine.input(RefreshFeed)
+        stateMachine.input(Refresh)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
@@ -40,12 +40,9 @@ class FeedPresenter @Inject constructor(
         cd.clear()
     }
 
-    fun input(it: FeedAction) {
+    fun input(it: DiscoverAction) {
         when (it) {
-            // По клику на пост, отрабатывает навигация
-            is FeedClicked -> router.goToPostDetail(it.feedPostId)
-            // Сортировка проваливается дальше в стэйт-машину
-            is RefreshFeed -> stateMachine.input(it)
+            is Refresh -> stateMachine.input(it)
         }.exhaustive
     }
 }

@@ -1,6 +1,5 @@
 package com.rcd27.playfm.presentation.post
 
-import android.text.Html
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +8,6 @@ import com.rcd27.playfm.R
 import com.rcd27.playfm.common.DisplayableItem
 import com.rcd27.playfm.common.RecycleViewAdapter
 import com.rcd27.playfm.common.RecyclerViewItemDecoration
-import com.rcd27.playfm.data.post.Post
 import com.rcd27.playfm.data.post.PostImage
 import com.rcd27.playfm.domain.post.PostLoadFailed
 import com.rcd27.playfm.domain.post.PostLoaded
@@ -18,7 +16,6 @@ import com.rcd27.playfm.domain.post.PostState
 import com.rcd27.playfm.extensions.exhaustive
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_post_image.view.*
-import kotlinx.android.synthetic.main.item_text_view.view.*
 import javax.inject.Inject
 
 /** ViewBinding для экрана поста. Инициализация вью и отображение стэйта - тут. */
@@ -29,34 +26,25 @@ class PostViewBinding @Inject constructor(
 
     private val adapter = RecycleViewAdapter()
 
-    private val text =
-        adapterDelegateLayoutContainer<Post, DisplayableItem>(R.layout.item_text_view) {
-            bind {
-                containerView.postTextView.text =
-                    Html.fromHtml(item.text)
-            }
-        }
-
     private val image = adapterDelegateLayoutContainer<PostImage, DisplayableItem>(
-        R.layout.item_post_image
+            R.layout.item_post_image
     ) {
         bind {
             val photoView = containerView.postPhotoView
 
             Picasso.get()
-                .load(item.imageUrl)
-                .placeholder(R.drawable.ic_image_grey_24dp)
-                .error(R.drawable.ic_broken_image_grey_24dp)
-                .fit()
-                .centerInside()
-                .into(photoView)
+                    .load(item.imageUrl)
+                    .placeholder(R.drawable.ic_image_grey_24dp)
+                    .error(R.drawable.ic_broken_image_grey_24dp)
+                    .fit()
+                    .centerInside()
+                    .into(photoView)
         }
     }
 
     init {
         adapter.delegatesManager
-            .addDelegate(text)
-            .addDelegate(image)
+                .addDelegate(image)
 
         postRecyclerView.apply {
             addItemDecoration(RecyclerViewItemDecoration)

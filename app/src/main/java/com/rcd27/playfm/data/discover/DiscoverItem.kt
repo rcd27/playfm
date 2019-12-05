@@ -6,7 +6,7 @@ import io.reactivex.functions.Function
 import org.threeten.bp.ZonedDateTime
 
 /** ViewObject для поста из ленты постов. Хранит состояние Открыт/Закрыт, по умолчанию - закрыт. */
-data class FeedPost(
+data class DiscoverItem(
     /** Id поста, берётся из модели API. */
     val id: Int,
     /**
@@ -25,10 +25,10 @@ data class FeedPost(
     private var expandedConsumer: ((FeedPostState) -> Unit)? = null
 
     companion object {
-        fun fromJSON(): Function<JSONRecording, FeedPost> =
+        fun fromJSON(): Function<JSONRecording, DiscoverItem> =
             Function { jsonObject ->
                 val stubDate = jsonObject.created_at.substringBefore("+").plus("Z[GMT]")
-                FeedPost(
+                DiscoverItem(
                     jsonObject.id,
                     ZonedDateTime.parse(stubDate),
                     jsonObject.playCount,
@@ -59,7 +59,7 @@ data class FeedPost(
         expandedConsumer?.invoke(FeedPostState.Collapsed)
     }
 
-    /** Колбэк, срабатывающий при смене поста [FeedPost.changeState]. */
+    /** Колбэк, срабатывающий при смене поста [DiscoverItem.changeState]. */
     fun onStateChange(callback: (FeedPostState) -> Unit) {
         this.expandedConsumer = callback
     }

@@ -5,11 +5,11 @@ import com.jakewharton.rxrelay2.ReplayRelay
 import com.rcd27.playfm.functional.StateVerifier
 import com.rcd27.playfm.presentation.MainActivity
 import com.rcd27.playfm.presentation.discover.FeedFragment
-import com.rcd27.playfm.presentation.discover.FeedViewState
+import com.rcd27.playfm.presentation.discover.DiscoverViewState
 
 class DiscoverRobot(testRule: ActivityScenarioRule<MainActivity>) {
 
-    private val flowStateHistory = ReplayRelay.create<FeedViewState>()
+    private val flowStateHistory = ReplayRelay.create<DiscoverViewState>()
     private val stateVerifier = StateVerifier(flowStateHistory)
 
     init {
@@ -22,7 +22,7 @@ class DiscoverRobot(testRule: ActivityScenarioRule<MainActivity>) {
                             .childFragmentManager
                             .fragments[0] as FeedFragment)
                             // Думаю, решится, когда будет запилен DI сервис. Тогда можно будет нужные компоненты брать из него
-                            .feedComponent
+                            .discoverComponent
                             .viewStateListener
 
             viewStateListener
@@ -31,11 +31,11 @@ class DiscoverRobot(testRule: ActivityScenarioRule<MainActivity>) {
     }
 
     val assertFeedsLoading
-        get() = stateVerifier.assertNextState(FeedViewState.Loading)
+        get() = stateVerifier.assertNextState(DiscoverViewState.Loading)
 
     val assertFeedsLoaded
-        get() = stateVerifier.assertNextState(FeedViewState.Loaded)
+        get() = stateVerifier.assertNextState(DiscoverViewState.Loaded)
 
     val assertFeedsLoadingError
-        get() = stateVerifier.assertNextState(FeedViewState.Error)
+        get() = stateVerifier.assertNextState(DiscoverViewState.Error)
 }

@@ -1,19 +1,19 @@
-package com.rcd27.playfm.domain.feed
+package com.rcd27.playfm.domain.discover
 
 import android.annotation.SuppressLint
 import com.jakewharton.rxrelay2.BehaviorRelay
+import com.rcd27.playfm.data.discover.DiscoverItem
 import com.rcd27.playfm.data.discover.DiscoverRepository
-import com.rcd27.playfm.data.discover.FeedPost
 import javax.inject.Inject
 
-/** Стэйт машина для экрана постов. Хранит состояние текущей сортировки. */
-class FeedStateMachine @Inject constructor(private val repository: DiscoverRepository) {
+/** State machine that is responsible for managing Discover screen */
+class DiscoverStateMachine @Inject constructor(private val repository: DiscoverRepository) {
 
     val state: BehaviorRelay<FeedState> = BehaviorRelay.create()
 
-    fun input(action: FeedAction) {
+    fun input(action: DiscoverAction) {
         when (action) {
-            is RefreshFeed -> {
+            is Refresh -> {
                 refresh()
             }
         }
@@ -32,19 +32,11 @@ class FeedStateMachine @Inject constructor(private val repository: DiscoverRepos
     }
 }
 
-sealed class FeedAction
-object RefreshFeed : FeedAction()
-data class FeedClicked(val feedPostId: Int) : FeedAction()
+sealed class DiscoverAction
+object Refresh : DiscoverAction()
 
 sealed class FeedState
 object FeedsLoading : FeedState()
-data class FeedLoaded(val feeds: List<FeedPost>) : FeedState()
+data class FeedLoaded(val feeds: List<DiscoverItem>) : FeedState()
 data class FeedLoadingError(val throwable: Throwable) : FeedState()
 data class FeedSortingError(val throwable: Throwable) : FeedState()
-
-sealed class SortingState
-object NoSorting : SortingState()
-object SortingNewestTop : SortingState()
-object SortingOldestTop : SortingState()
-object SortingTopRateTop : SortingState()
-object SortingLowRateTop : SortingState()
