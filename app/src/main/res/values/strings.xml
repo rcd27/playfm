@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">play.fm</string>
+    <string name="according_rate">Play count</string>
+    <string name="according_date">Date</string>
+</resources>

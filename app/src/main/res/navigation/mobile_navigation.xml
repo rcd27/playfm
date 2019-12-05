@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/dest_feed">
+
+    <fragment
+        android:id="@+id/dest_feed"
+        android:name="com.rcd27.playfm.presentation.discover.FeedFragment"
+        android:label="Экран ленты"
+        tools:layout="@layout/fragment_feed" />
+
+    <action
+        android:id="@+id/action_go_to_post_dest"
+        app:destination="@+id/dest_post"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <fragment
+        android:id="@+id/dest_post"
+        android:name="com.rcd27.playfm.presentation.post.PostFragment"
+        android:label="Экран поста"
+        tools:layout="@layout/fragment_post" />
+
+</navigation>
