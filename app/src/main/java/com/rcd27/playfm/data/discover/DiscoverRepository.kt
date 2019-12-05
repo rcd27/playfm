@@ -15,18 +15,23 @@ class DiscoverRepository @Inject constructor(private val api: DiscoverApi) {
      */
     fun getPosts(): Single<List<FeedPost>> {
         return if (currentPosts.isEmpty()) {
-            api.getTrending()
-                // TODO: figure out if this is truly needed, maybe there is some function for this
-                // Unwrap List from Single
-                .flatMapObservable { response -> fromIterable(response) }
-                // Mapping JSON object to ViewObject here in order to fix API changes only
-                // in mapping functions, but whole app.
-                .map<FeedPost>(FeedPost.fromJSON())
-                .toList()
-                .map { posts ->
-                    currentPosts = posts
-                    posts
-                }
+            api.getTrending(mapOf(
+                    "page" to "1",
+                    "per_page" to "12",
+                    "total_pages" to "0",
+                    "sort_by" to "id",
+                    "order" to "desc"))
+                    // TODO: figure out if this is truly needed, maybe there is some function for this
+                    // Unwrap List from Single
+                    .flatMapObservable { response -> fromIterable(response) }
+                    // Mapping JSON object to ViewObject here in order to fix API changes only
+                    // in mapping functions, but whole app.
+                    .map<FeedPost>(FeedPost.fromJSON())
+                    .toList()
+                    .map { posts ->
+                        currentPosts = posts
+                        posts
+                    }
         } else {
             Single.just(currentPosts)
         }
