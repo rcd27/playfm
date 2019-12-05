@@ -12,9 +12,9 @@ class StateVerifier<in S>(private val stateObservable: ReplayRelay<S>) {
 
         val expectedStates: List<S> = alreadyVerifiedStates + nextExpectedState
         val actualStates: List<S> = stateObservable.take(alreadyVerifiedStates.size + 1L)
-            .timeout(5, TimeUnit.SECONDS)
-            .toList()
-            .blockingGet()
+                .timeout(5, TimeUnit.SECONDS)
+                .toList()
+                .blockingGet()
 
         Truth.assertThat(actualStates).containsExactlyElementsIn(expectedStates).inOrder()
 

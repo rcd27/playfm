@@ -28,9 +28,9 @@ class FeedPresenter @Inject constructor(
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
         cd += stateMachine.state
-            .observeOn(AndroidSchedulers.mainThread())
-            // TODO: handle FeedLoadError
-            .subscribe(viewBinding::render)
+                .observeOn(AndroidSchedulers.mainThread())
+                // TODO: handle FeedLoadError
+                .subscribe(viewBinding::render)
 
         stateMachine.input(RefreshFeed)
     }
@@ -45,7 +45,7 @@ class FeedPresenter @Inject constructor(
             // По клику на пост, отрабатывает навигация
             is FeedClicked -> router.goToPostDetail(it.feedPostId)
             // Сортировка проваливается дальше в стэйт-машину
-            is SortByDate, SortByRate, RefreshFeed -> stateMachine.input(it)
+            is RefreshFeed -> stateMachine.input(it)
         }.exhaustive
     }
 }

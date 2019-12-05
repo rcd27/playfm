@@ -9,9 +9,9 @@ import org.junit.runner.RunWith
 class PostRepositoryTest {
 
     private val postRepository = PostRepository(
-        AppRobolectricTestRunner.pikabuTestcaseApp()
-            .applicationComponent
-            .postApi
+            AppRobolectricTestRunner.pikabuTestcaseApp()
+                    .applicationComponent
+                    .postApi
     )
 
     @Test
@@ -19,7 +19,7 @@ class PostRepositoryTest {
         val testObserver: TestObserver<Post> = TestObserver.create()
 
         postRepository.getPostById(111) // FIXME: получить существующий айдишник вне теста
-            .subscribe(testObserver)
+                .subscribe(testObserver)
 
         testObserver.await()
         testObserver.assertComplete()

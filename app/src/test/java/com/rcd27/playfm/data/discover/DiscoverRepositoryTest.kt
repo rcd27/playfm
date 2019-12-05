@@ -10,10 +10,10 @@ import org.junit.runner.RunWith
 class DiscoverRepositoryTest {
 
     private val discoverRepository = DiscoverRepository(
-        AppRobolectricTestRunner
-            .pikabuTestcaseApp()
-            .applicationComponent
-            .discoverApi
+            AppRobolectricTestRunner
+                    .pikabuTestcaseApp()
+                    .applicationComponent
+                    .discoverApi
     )
 
     @Test
@@ -21,7 +21,7 @@ class DiscoverRepositoryTest {
         val testObserver: TestObserver<List<FeedPost>> = TestObserver.create()
 
         discoverRepository.getPosts()
-            .subscribe(testObserver)
+                .subscribe(testObserver)
 
         testObserver.await()
         testObserver.assertComplete()
@@ -34,9 +34,9 @@ class DiscoverRepositoryTest {
     fun `Sorting by date`() {
         val sortedPosts: List<FeedPost> = discoverRepository.getSortedByDatePosts().blockingGet()
         val sortedByDescending: List<FeedPost> =
-            discoverRepository.getSortedByDescendingDate().blockingGet()
+                discoverRepository.getSortedByDescendingDate().blockingGet()
 
         assertThat(sortedPosts.sortedByDescending { post -> post.date })
-            .containsExactlyElementsIn(sortedByDescending)
+                .containsExactlyElementsIn(sortedByDescending)
     }
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="global_margin_sides">16dp</dimen>
+  <dimen name="global_elevation">4dp</dimen>
+  <dimen name="global_list_element_height">52dp</dimen>
+  <dimen name="card_margin">10dp</dimen>
+  <dimen name="sixteen_sp">16sp</dimen>
+  <dimen name="logo_margin">30dp</dimen>
+</resources>

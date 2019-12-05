@@ -5,7 +5,6 @@ import android.animation.ObjectAnimator.ofInt
 import android.content.Context
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,8 +19,7 @@ import com.rcd27.playfm.common.RecyclerViewItemDecoration
 import com.rcd27.playfm.data.discover.FeedPost
 import com.rcd27.playfm.domain.feed.*
 import com.rcd27.playfm.extensions.exhaustive
-import com.rcd27.playfm.extensions.setRightDrawable
-import kotlinx.android.synthetic.main.item_feed_post.view.*
+import kotlinx.android.synthetic.main.item_discover_slider.view.*
 import javax.inject.Inject
 
 /* ViewBinding для экрана постов. Вся логика по отрисовке экрана - здесь. */
@@ -33,13 +31,11 @@ class FeedViewBinding @Inject constructor(
     private val context: Context // FIXME: move to appropriate class
 ) {
 
-    private val sortByRateButton = root.findViewById<AppCompatButton>(R.id.feedSortByRateButton)
-    private val sortByDateButton = root.findViewById<AppCompatButton>(R.id.feedSortByDateButton)
     private val feedRecyclerView = root.findViewById<RecyclerView>(R.id.feedRecyclerView)
 
     private val adapter = RecycleViewAdapter()
     private val postItem = adapterDelegateLayoutContainer<FeedPost, DisplayableItem>(
-        R.layout.item_feed_post
+            R.layout.item_discover_slider
     ) {
         bind {
             val postItemTextView = containerView.postItemTextView
@@ -48,7 +44,6 @@ class FeedViewBinding @Inject constructor(
             val postItemButton = containerView.postItemButton
             postItemButton.setOnClickListener {
                 item.changeState()
-                stateListener.accept(FeedViewState.PostItemExpand)
             }
 
             item.onStateChange { state ->
@@ -74,10 +69,10 @@ class FeedViewBinding @Inject constructor(
                 animation.setDuration(500).start()
 
                 postItemButton.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        context,
-                        R.drawable.ic_keyboard_arrow_up_light_green_24dp
-                    )
+                        ContextCompat.getDrawable(
+                                context,
+                                R.drawable.ic_keyboard_arrow_up_light_green_24dp
+                        )
                 )
             }
             is FeedPost.FeedPostState.Collapsed -> {
@@ -86,10 +81,10 @@ class FeedViewBinding @Inject constructor(
                 animation.setDuration(500).start()
 
                 postItemButton.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        context,
-                        R.drawable.ic_keyboard_arrow_down_dark_green_24dp
-                    )
+                        ContextCompat.getDrawable(
+                                context,
+                                R.drawable.ic_keyboard_arrow_down_dark_green_24dp
+                        )
                 )
             }
         }.exhaustive
@@ -98,20 +93,12 @@ class FeedViewBinding @Inject constructor(
     init {
         // FIXME: выяснить, почему не хочет принимать MaterialButton
         adapter.delegatesManager
-            .addDelegate(postItem)
+                .addDelegate(postItem)
 
         feedRecyclerView.apply {
             addItemDecoration(RecyclerViewItemDecoration)
             this.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             this.adapter = this@FeedViewBinding.adapter
-        }
-
-        sortByDateButton.setOnClickListener {
-            actionListener.invoke(SortByDate)
-        }
-
-        sortByRateButton.setOnClickListener {
-            actionListener.invoke(SortByRate)
         }
     }
 
@@ -132,46 +119,9 @@ class FeedViewBinding @Inject constructor(
                 }
                 stateListener.accept(FeedViewState.Error)
             }
-            is FeedSorted -> {
-                adapter.items = state.sortedPosts
-                adapter.notifyDataSetChanged()
-
-                val up = ContextCompat.getDrawable(
-                    context,
-                    R.drawable.ic_arrow_drop_up_grey_24dp
-                )
-                val down = ContextCompat.getDrawable(
-                    context,
-                    R.drawable.ic_arrow_drop_down_grey_24dp
-                )
-
-                when (state.sorting) {
-                    is NoSorting -> {
-                        sortByRateButton.setRightDrawable(null)
-                        sortByDateButton.setRightDrawable(null)
-                    }
-                    is SortingLowRateTop -> {
-                        sortByRateButton.setRightDrawable(up)
-                        sortByDateButton.setRightDrawable(null)
-                    }
-                    is SortingTopRateTop -> {
-                        sortByRateButton.setRightDrawable(down)
-                        sortByDateButton.setRightDrawable(null)
-                    }
-                    is SortingOldestTop -> {
-                        sortByRateButton.setRightDrawable(null)
-                        sortByDateButton.setRightDrawable(up)
-                    }
-                    is SortingNewestTop -> {
-                        sortByRateButton.setRightDrawable(null)
-                        sortByDateButton.setRightDrawable(down)
-                    }
-                }.exhaustive
-                stateListener.accept(FeedViewState.Invalidate)
-            }
             is FeedSortingError -> {
                 root.background =
-                    ContextCompat.getDrawable(context, R.drawable.ic_error_red_24dp)
+                        ContextCompat.getDrawable(context, R.drawable.ic_error_red_24dp)
             }
         }.exhaustive
     }
@@ -181,8 +131,4 @@ sealed class FeedViewState {
     object Loading : FeedViewState()
     object Loaded : FeedViewState()
     object Error : FeedViewState()
-
-    object Invalidate : FeedViewState()
-
-    object PostItemExpand : FeedViewState()
 }

@@ -1,9 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+  <color name="strangeColor">#029892</color>
+  <color name="strangeColorFoggy">#237178</color>
+  <color name="strangeColorLight">#64C6D0</color>
+  <color name="newTextColorDark">#273D52</color>
+  <color name="newTextColorDarkWithOpacity">#80273D52</color>
+  <color name="errorGradientRed">#80fa7575</color>
+  <color name="hintColor">#66273d52</color>
 
-    <color name="border_grey">#d9d9d9</color>
-    <color name="colorLightGray">#f7f7f7</color>
+  <color name="bottomNavigationInactiveColor">#b2bcc5</color>
+
+  <color name="strangePickColor">#4cbadade</color>
+  <color name="inactiveText">#807e8c98</color>
+  <color name="editTextGrey">#66273d52</color>
+
+  <color name="accentGreen">#47cc5c</color>
+  <color name="white">#ffffff</color>
+  <color name="alarmRed">#b83233</color>
+
+  <color name="colorPrimary">#759bfa</color>
+  <color name="colorPrimaryDark">#273d52</color>
+
+  <array name="rect_color">
+    <item>@color/inactiveText</item>
+  </array>
+
+  <!-- Crypto colors -->
+  <color name="colorBtc">#ffc25d</color>
+  <color name="colorEth">#7a9594</color>
+
+  <array name="wallet_colors">
+    <item>#ffc25d</item>
+    <item>#6ef588</item>
+    <item>#443f54</item>
+    <item>#38bbff</item>
+    <item>#7a9594</item>
+  </array>
+
+  <color name="colorHeader">#050a91a3</color>
+  <color name="prices">#99ffc25d</color>
+
 </resources>

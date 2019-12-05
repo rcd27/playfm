@@ -12,7 +12,7 @@ import javax.inject.Inject
 import kotlin.properties.Delegates
 
 /** Экран постов. */
-class FeedFragment : Fragment(R.layout.fragment_feed) {
+class FeedFragment : Fragment(R.layout.fragment_discover) {
 
     // Если убрать, то даггер не идёт по графу зависимостей и не создаёт ничего
     // TODO: реализовать через котлиновские делегаты, убрав туда аннотации.

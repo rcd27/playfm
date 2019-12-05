@@ -9,7 +9,7 @@
         android:id="@+id/dest_feed"
         android:name="com.rcd27.playfm.presentation.discover.FeedFragment"
         android:label="Экран ленты"
-        tools:layout="@layout/fragment_feed" />
+        tools:layout="@layout/fragment_discover" />
 
     <action
         android:id="@+id/action_go_to_post_dest"

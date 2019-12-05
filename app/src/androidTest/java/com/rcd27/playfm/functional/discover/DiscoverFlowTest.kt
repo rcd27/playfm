@@ -20,22 +20,6 @@ class DiscoverFlowTest {
             assertFeedsLoading
 
             assertFeedsLoaded
-
-            /* TODO
-            clickExpandButton()
-            assertPostItemExpand */
-
-            // Check sorting by date
-            clickSortByDateButton()
-            assertViewChanged
-            clickSortByDateButton()
-            assertViewChanged
-
-            // Check sorting by rate
-            clickSortByRateButton()
-            assertViewChanged
-            clickSortByRateButton()
-            assertViewChanged
         }
     }
 }
