@@ -11,83 +11,32 @@ class DiscoverRepository @Inject constructor(private val api: DiscoverApi) {
     private var currentPosts: List<DiscoverItem> = emptyList()
 
     /**
-     * Получить список постов. Если ранее они не были загружены/изменены, взять от бэк-энда.
+     * Get 1 page of 12 trending recordings which are sorted by [com.rcd27.playfm.api.discover.JSONRecording.id]
      */
-    fun getPosts(): Single<List<DiscoverItem>> {
+    fun getTrendingRecordings(): Single<List<DiscoverItem>> {
         return if (currentPosts.isEmpty()) {
-            api.getTrending(mapOf(
+            api.getTrending(
+                mapOf(
                     "page" to "1",
                     "per_page" to "12",
                     "total_pages" to "0",
                     "sort_by" to "id",
-                    "order" to "desc"))
-                    // TODO: figure out if this is truly needed, maybe there is some function for this
-                    // Unwrap List from Single
-                    .flatMapObservable { response -> fromIterable(response) }
-                    // Mapping JSON object to ViewObject here in order to fix API changes only
-                    // in mapping functions, but whole app.
-                    .map<DiscoverItem>(DiscoverItem.fromJSON())
-                    .toList()
-                    .map { posts ->
-                        currentPosts = posts
-                        posts
-                    }
+                    "order" to "desc"
+                )
+            )
+                // TODO: figure out if this is truly needed, maybe there is some function for this
+                // Unwrap List from Single
+                .flatMapObservable { response -> fromIterable(response) }
+                // Mapping JSON object to ViewObject here in order to fix API changes only
+                // in mapping functions, but whole app.
+                .map<DiscoverItem>(DiscoverItem.fromJSON())
+                .toList()
+                .map { posts ->
+                    currentPosts = posts
+                    posts
+                }
         } else {
             Single.just(currentPosts)
-        }
-    }
-
-    /**
-     *  Сортирует ранее полученный список постов по дате: старше -> новее.
-     *  Если ранее посты не были получены, [currentPosts] - пуст, получить от бэка и отсортировать.
-     */
-    fun getSortedByDatePosts(): Single<List<DiscoverItem>> {
-        return if (currentPosts.isNotEmpty()) {
-            val sorted = currentPosts.sortedBy { post -> post.date }
-            currentPosts = sorted
-            Single.just(currentPosts)
-        } else {
-            getPosts().flatMap { getSortedByDatePosts() }
-        }
-    }
-
-    /**
-     *  Сортировка постов: новее -> старше.
-     *  Получить список постов от бэка, если текущий список постов пуст.
-     */
-    fun getSortedByDescendingDate(): Single<List<DiscoverItem>> {
-        return if (currentPosts.isNotEmpty()) {
-            val sorted = currentPosts.sortedByDescending { post -> post.date }
-            currentPosts = sorted
-            Single.just(currentPosts)
-        } else {
-            getPosts().flatMap { getSortedByDescendingDate() }
-        }
-    }
-
-    /**
-     * Сортировка постов по рейтингу: ниже -> выше.
-     */
-    fun getSortedByRatePosts(): Single<List<DiscoverItem>> {
-        return if (currentPosts.isNotEmpty()) {
-            val sorted = currentPosts.sortedBy { post -> post.likesCount }
-            currentPosts = sorted
-            Single.just(currentPosts)
-        } else {
-            getPosts().flatMap { getSortedByRatePosts() }
-        }
-    }
-
-    /**
-     * Сортировка постов по рейтингу: выше -> ниже.
-     */
-    fun getSortedByDescendingRatePosts(): Single<List<DiscoverItem>> {
-        return if (currentPosts.isNotEmpty()) {
-            val sorted = currentPosts.sortedByDescending { post -> post.likesCount }
-            currentPosts = sorted
-            Single.just(currentPosts)
-        } else {
-            getPosts().flatMap { getSortedByDescendingRatePosts() }
         }
     }
 }

@@ -21,14 +21,14 @@ class DiscoverStateMachine @Inject constructor(private val repository: DiscoverR
 
     @SuppressLint("CheckResult")
     private fun refresh() {
-        // TODO: добавить все чейны в один большой CompositeDisposable для всего приложения
-        repository.getPosts()
-                .doOnSubscribe { state.accept(FeedsLoading) }
-                .subscribe({ posts ->
-                    state.accept(FeedLoaded(posts))
-                }, { error ->
-                    state.accept(FeedLoadingError(error))
-                })
+        // TODO: provide one Composite Disposable in Presenter layer, which will be managed there
+        repository.getTrendingRecordings()
+            .doOnSubscribe { state.accept(FeedsLoading) }
+            .subscribe({ posts ->
+                state.accept(FeedLoaded(posts))
+            }, { error ->
+                state.accept(FeedLoadingError(error))
+            })
     }
 }
 

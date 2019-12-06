@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="strangeColor">#029892</color>
-  <color name="strangeColorFoggy">#237178</color>
-  <color name="strangeColorLight">#64C6D0</color>
-  <color name="newTextColorDark">#273D52</color>
-  <color name="newTextColorDarkWithOpacity">#80273D52</color>
+  <color name="colorPrimary">#256d7b</color>
+  <color name="colorPrimaryDark">#273d52</color>
+
+  <color name="persianGreen">#029892</color>
+  <color name="persianGreenFoggy">#237178</color>
+
+  <color name="calmTurquoise">#64C6D0</color>
+  <color name="calmTurquoiseWithOpacity">#8064C6D0</color>
+  <color name="calmTurquoiseLight">#dcf2f5</color>
+
+  <color name="textColorDark">#273D52</color>
+  <color name="textColorDarkWithOpacity">#80273D52</color>
+
   <color name="errorGradientRed">#80fa7575</color>
   <color name="hintColor">#66273d52</color>
 
@@ -17,9 +25,6 @@
   <color name="accentGreen">#47cc5c</color>
   <color name="white">#ffffff</color>
   <color name="alarmRed">#b83233</color>
-
-  <color name="colorPrimary">#759bfa</color>
-  <color name="colorPrimaryDark">#273d52</color>
 
   <array name="rect_color">
     <item>@color/inactiveText</item>

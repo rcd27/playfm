@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:color="@color/strangeColorLight"
+    android:color="@color/calmTurquoise"
     tools:targetApi="LOLLIPOP">
     <item android:id="@android:id/mask">
         <shape android:shape="rectangle">
@@ -14,13 +14,13 @@
             <item android:state_pressed="true">
                 <shape android:shape="rectangle">
                     <corners android:radius="4dip" />
-                    <solid android:color="@color/strangeColorFoggy" />
+                    <solid android:color="@color/persianGreenFoggy" />
                 </shape>
             </item>
             <item>
                 <shape android:shape="rectangle">
                     <corners android:radius="4dip" />
-                    <solid android:color="@color/strangeColor" />
+                    <solid android:color="@color/persianGreen" />
                 </shape>
             </item>
         </selector>

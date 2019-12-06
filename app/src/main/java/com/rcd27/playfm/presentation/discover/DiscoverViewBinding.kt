@@ -12,25 +12,30 @@ import com.rcd27.playfm.common.DisplayableItem
 import com.rcd27.playfm.common.RecycleViewAdapter
 import com.rcd27.playfm.common.RecyclerViewItemDecoration
 import com.rcd27.playfm.data.discover.DiscoverItem
-import com.rcd27.playfm.domain.discover.*
+import com.rcd27.playfm.domain.discover.DiscoverAction
+import com.rcd27.playfm.domain.discover.FeedLoaded
+import com.rcd27.playfm.domain.discover.FeedLoadingError
+import com.rcd27.playfm.domain.discover.FeedSortingError
+import com.rcd27.playfm.domain.discover.FeedState
+import com.rcd27.playfm.domain.discover.FeedsLoading
 import com.rcd27.playfm.extensions.exhaustive
 import kotlinx.android.synthetic.main.item_discover_slider.view.*
 import javax.inject.Inject
 
 /* ViewBinding for Discover feature, all view renderings here. */
 class DiscoverViewBinding @Inject constructor(
-        private val root: View,
-        private val errorDisplay: (String, () -> Unit) -> Unit,
-        private val actionListener: (DiscoverAction) -> Unit,
-        private val stateListener: BehaviorRelay<DiscoverViewState>,
-        private val context: Context // FIXME: move to appropriate class
+    private val root: View,
+    private val errorDisplay: (String, () -> Unit) -> Unit,
+    private val actionListener: (DiscoverAction) -> Unit,
+    private val stateListener: BehaviorRelay<DiscoverViewState>,
+    private val context: Context // FIXME: move to appropriate class
 ) {
 
     private val feedRecyclerView = root.findViewById<RecyclerView>(R.id.feedRecyclerView)
 
     private val adapter = RecycleViewAdapter()
     private val slider = adapterDelegateLayoutContainer<DiscoverItem, DisplayableItem>(
-            R.layout.item_discover_slider
+        R.layout.item_discover_slider
     ) {
         bind {
             val header = containerView.sliderHeader
@@ -41,7 +46,7 @@ class DiscoverViewBinding @Inject constructor(
     init {
         // FIXME: выяснить, почему не хочет принимать MaterialButton
         adapter.delegatesManager
-                .addDelegate(slider)
+            .addDelegate(slider)
 
         feedRecyclerView.apply {
             addItemDecoration(RecyclerViewItemDecoration)
@@ -69,7 +74,7 @@ class DiscoverViewBinding @Inject constructor(
             }
             is FeedSortingError -> {
                 root.background =
-                        ContextCompat.getDrawable(context, R.drawable.ic_error_red_24dp)
+                    ContextCompat.getDrawable(context, R.drawable.ic_error_red_24dp)
             }
         }.exhaustive
     }

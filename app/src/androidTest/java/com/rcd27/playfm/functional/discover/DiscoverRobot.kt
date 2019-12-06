@@ -4,7 +4,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.jakewharton.rxrelay2.ReplayRelay
 import com.rcd27.playfm.functional.StateVerifier
 import com.rcd27.playfm.presentation.MainActivity
-import com.rcd27.playfm.presentation.discover.FeedFragment
+import com.rcd27.playfm.presentation.discover.DiscoverFragment
 import com.rcd27.playfm.presentation.discover.DiscoverViewState
 
 class DiscoverRobot(testRule: ActivityScenarioRule<MainActivity>) {
@@ -20,7 +20,7 @@ class DiscoverRobot(testRule: ActivityScenarioRule<MainActivity>) {
                             .supportFragmentManager
                             .fragments[0]
                             .childFragmentManager
-                            .fragments[0] as FeedFragment)
+                            .fragments[0] as DiscoverFragment)
                             // Думаю, решится, когда будет запилен DI сервис. Тогда можно будет нужные компоненты брать из него
                             .discoverComponent
                             .viewStateListener

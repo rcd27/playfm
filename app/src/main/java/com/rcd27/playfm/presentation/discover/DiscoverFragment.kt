@@ -11,14 +11,14 @@ import com.rcd27.playfm.presentation.MainActivity
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
-/** Экран постов. */
-class FeedFragment : Fragment(R.layout.fragment_discover) {
+/** Screen for Discover feature. */
+class DiscoverFragment : Fragment(R.layout.fragment_discover) {
 
-    // Если убрать, то даггер не идёт по графу зависимостей и не создаёт ничего
-    // TODO: реализовать через котлиновские делегаты, убрав туда аннотации.
+    // If removed, Dagger2 doesn't compile any factories
+    // TODO: Move to Kotlin delegates.
     @Inject
     @JvmField
-    var presenter: FeedPresenter? = null
+    var presenter: DiscoverPresenter? = null
 
     var discoverComponent: DiscoverComponent by Delegates.notNull()
 
@@ -31,7 +31,7 @@ class FeedFragment : Fragment(R.layout.fragment_discover) {
                     lifecycle,
                     actionListener = { action ->
                         presenter?.input(action)
-                            ?: throw RuntimeException("FeedPresenter must be initialized")
+                            ?: throw RuntimeException("DiscoverPresenter must be initialized")
                     },
                     viewStateListener = BehaviorRelay.create()
                 )

@@ -10,10 +10,10 @@ import dagger.Provides
 
 @Module
 class DiscoverModule(
-        private val rootView: View,
-        private val lifecycle: Lifecycle,
-        private val actionListener: (DiscoverAction) -> Unit,
-        private val viewStateListener: BehaviorRelay<DiscoverViewState>
+    private val rootView: View,
+    private val lifecycle: Lifecycle,
+    private val actionListener: (DiscoverAction) -> Unit,
+    private val viewStateListener: BehaviorRelay<DiscoverViewState>
 ) {
 
     @Provides

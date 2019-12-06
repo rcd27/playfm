@@ -14,8 +14,8 @@ import javax.inject.Inject
 
 /** Presenter для экрана поста, обрабатывает ошибку загрузки поста. */
 class PostPresenter @Inject constructor(
-    private val viewBinding: PostViewBinding,
     lifecycle: Lifecycle,
+    private val viewBinding: PostViewBinding,
     private val stateMachine: PostStateMachine,
     private val currentPostId: Long,
     private val router: Router,

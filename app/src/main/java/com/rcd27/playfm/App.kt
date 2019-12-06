@@ -13,7 +13,7 @@ open class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        /** [org.threeten.bp]*/
+        /** Time API for JSR-310 (see https://jcp.org/en/jsr/detail?id=310) */
         AndroidThreeTen.init(this)
 
         applicationComponent = prepareApplicationComponent().build()
@@ -24,6 +24,6 @@ open class App : Application() {
      */
     protected open fun prepareApplicationComponent(): DaggerApplicationComponent.Builder {
         return DaggerApplicationComponent.builder()
-                .applicationModule(ApplicationModule(applicationContext))
+            .applicationModule(ApplicationModule(applicationContext))
     }
 }

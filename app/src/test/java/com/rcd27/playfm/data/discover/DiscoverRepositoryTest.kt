@@ -20,7 +20,7 @@ class DiscoverRepositoryTest {
     fun `Repository returns list of posts`() {
         val testObserver: TestObserver<List<DiscoverItem>> = TestObserver.create()
 
-        discoverRepository.getPosts()
+        discoverRepository.getTrendingRecordings()
                 .subscribe(testObserver)
 
         testObserver.await()
@@ -28,17 +28,5 @@ class DiscoverRepositoryTest {
         testObserver.assertNoErrors()
 
         assertThat(testObserver.values()[0]).isNotEmpty()
-    }
-
-    @Test
-    fun `Sorting by date`() {
-        val sortedPosts: List<DiscoverItem> =
-                discoverRepository.getSortedByDatePosts().blockingGet()
-
-        val sortedByDescending: List<DiscoverItem> =
-                discoverRepository.getSortedByDescendingDate().blockingGet()
-
-        assertThat(sortedPosts.sortedByDescending { post -> post.date })
-                .containsExactlyElementsIn(sortedByDescending)
     }
 }

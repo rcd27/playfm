@@ -3,7 +3,9 @@ package com.rcd27.playfm.presentation.discover
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-import com.rcd27.playfm.domain.discover.*
+import com.rcd27.playfm.domain.discover.DiscoverAction
+import com.rcd27.playfm.domain.discover.DiscoverStateMachine
+import com.rcd27.playfm.domain.discover.Refresh
 import com.rcd27.playfm.extensions.exhaustive
 import com.rcd27.playfm.extensions.plusAssign
 import com.rcd27.playfm.navigation.Router
@@ -11,12 +13,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-/** Presenter для экрана постов. Отвечает за фильтрацию [DiscoverAction] и [FeedState]. */
-class FeedPresenter @Inject constructor(
-        lifecycle: Lifecycle,
-        private val viewBinding: DiscoverViewBinding,
-        private val stateMachine: DiscoverStateMachine,
-        private val router: Router
+/** Presenter layer for Discover feature. Handles inputs*/
+class DiscoverPresenter @Inject constructor(
+    lifecycle: Lifecycle,
+    private val viewBinding: DiscoverViewBinding,
+    private val stateMachine: DiscoverStateMachine,
+    private val router: Router
 ) : LifecycleObserver {
 
     private val cd = CompositeDisposable()
@@ -28,9 +30,9 @@ class FeedPresenter @Inject constructor(
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
         cd += stateMachine.state
-                .observeOn(AndroidSchedulers.mainThread())
-                // TODO: handle FeedLoadError
-                .subscribe(viewBinding::render)
+            .observeOn(AndroidSchedulers.mainThread())
+            // TODO: handle FeedLoadError
+            .subscribe(viewBinding::render)
 
         stateMachine.input(Refresh)
     }

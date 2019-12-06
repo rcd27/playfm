@@ -27,24 +27,24 @@ class PostViewBinding @Inject constructor(
     private val adapter = RecycleViewAdapter()
 
     private val image = adapterDelegateLayoutContainer<PostImage, DisplayableItem>(
-            R.layout.item_post_image
+        R.layout.item_post_image
     ) {
         bind {
             val photoView = containerView.postPhotoView
 
             Picasso.get()
-                    .load(item.imageUrl)
-                    .placeholder(R.drawable.ic_image_grey_24dp)
-                    .error(R.drawable.ic_broken_image_grey_24dp)
-                    .fit()
-                    .centerInside()
-                    .into(photoView)
+                .load(item.imageUrl)
+                .placeholder(R.drawable.ic_image_grey_24dp)
+                .error(R.drawable.ic_broken_image_grey_24dp)
+                .fit()
+                .centerInside()
+                .into(photoView)
         }
     }
 
     init {
         adapter.delegatesManager
-                .addDelegate(image)
+            .addDelegate(image)
 
         postRecyclerView.apply {
             addItemDecoration(RecyclerViewItemDecoration)

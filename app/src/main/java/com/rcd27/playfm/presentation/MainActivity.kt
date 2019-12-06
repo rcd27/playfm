@@ -16,12 +16,12 @@ class MainActivity : AppCompatActivity() {
     private val showError: (errorMessage: String, onDismiss: () -> Unit) -> Unit =
         { errorMessage, action ->
             val builder = AlertDialog.Builder(this@MainActivity)
-            builder.setTitle("Ошибка")
+            builder.setTitle("Unexpected error")
                 .setMessage(errorMessage)
                 .setIcon(R.drawable.ic_error_red_24dp)
                 .setCancelable(false)
                 .setNegativeButton(
-                    "ОК, посмотрю другой"
+                    "That's a shame"
                 ) { dialog, _ ->
                     action.invoke()
                     dialog.cancel()

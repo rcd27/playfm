@@ -10,6 +10,7 @@ import com.rcd27.playfm.presentation.MainActivity
 import javax.inject.Inject
 
 /** Экран поста. */
+@Deprecated("This will be changed to RecordingFragment")
 class PostFragment : Fragment(R.layout.fragment_post) {
 
     @Inject

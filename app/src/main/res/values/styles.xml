@@ -2,12 +2,13 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/strangeColor</item>
+        <item name="colorPrimary">@color/persianGreenFoggy</item>
+        <!-- Used for windowActionBar (time and battery OS bar) as well-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/persianGreen</item>
         <item name="android:windowBackground">@color/white</item>
         <!--For `back` button in toolbar-->
-        <item name="colorControlNormal">@color/strangeColor</item>
+        <item name="colorControlNormal">@color/persianGreen</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -29,31 +30,31 @@
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/newTextColorDark</item>
+        <item name="android:textColor">@color/textColorDark</item>
     </style>
 
     <style name="ExchangeExplanationText">
         <item name="android:fontFamily">@font/montserrat_medium</item>
-        <item name="android:textColor">@color/newTextColorDarkWithOpacity</item>
+        <item name="android:textColor">@color/textColorDarkWithOpacity</item>
         <item name="android:textSize">11sp</item>
     </style>
 
     <style name="SmallMediumDarkText">
         <item name="android:fontFamily">@font/montserrat_medium</item>
-        <item name="android:textColor">@color/newTextColorDark</item>
+        <item name="android:textColor">@color/textColorDark</item>
         <item name="android:textSize">11sp</item>
     </style>
 
     <style name="MediumDarkText">
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/newTextColorDark</item>
+        <item name="android:textColor">@color/textColorDark</item>
     </style>
 
-    <style name="ExchangeEditTextText">
+    <style name="FeatureHeaderText">
         <item name="android:fontFamily">@font/montserrat_semi_bold</item>
         <item name="android:textSize">21sp</item>
-        <item name="android:color">@color/newTextColorDark</item>
+        <item name="android:color">@color/textColorDark</item>
     </style>
 
     <style name="BorderlessButton">
@@ -74,7 +75,7 @@
     <style name="SemiBoldDarkTitle">
         <item name="android:fontFamily">@font/montserrat_semi_bold</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/newTextColorDark</item>
+        <item name="android:textColor">@color/textColorDark</item>
     </style>
 
     <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog">
@@ -83,7 +84,7 @@
 
     <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:colorAccent">@color/alarmRed</item>
-        <item name="android:textColorPrimary">@color/newTextColorDark</item>
+        <item name="android:textColorPrimary">@color/textColorDark</item>
         <item name="android:textAppearance">@style/BottomSheetSmallTitle</item>
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowBackground">@drawable/bg_alert_dialog</item>
@@ -100,34 +101,34 @@
 
     <style name="EnterPhoneEditText">
         <item name="colorControlNormal">@color/hintColor</item>
-        <item name="colorControlActivated">@color/newTextColorDarkWithOpacity</item>
-        <item name="colorControlHighlight">@color/newTextColorDark</item>
+        <item name="colorControlActivated">@color/textColorDarkWithOpacity</item>
+        <item name="colorControlHighlight">@color/textColorDark</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:textColorHint">@color/hintColor</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/newTextColorDark</item>
+        <item name="android:textColor">@color/textColorDark</item>
     </style>
 
     <style name="HeaderText">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/newTextColorDark</item>
+        <item name="android:textColor">@color/textColorDark</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
     </style>
 
     <style name="BottomSheetSmallTitle">
         <item name="android:fontFamily">@font/montserrat_medium</item>
-        <item name="android:textColor">@color/newTextColorDarkWithOpacity</item>
+        <item name="android:textColor">@color/textColorDarkWithOpacity</item>
         <item name="android:textSize">12sp</item>
     </style>
 
     <style name="BottomSheetSmallValue">
         <item name="android:fontFamily">@font/montserrat_medium</item>
-        <item name="android:textColor">@color/newTextColorDark</item>
+        <item name="android:textColor">@color/textColorDark</item>
         <item name="android:textSize">12sp</item>
     </style>
 
     <style name="CollapsingToolbarTitle" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/newTextColorDark</item>
+        <item name="android:textColor">@color/textColorDark</item>
         <item name="android:textSize">32sp</item>
         <item name="android:fontFamily">@font/montserrat_semi_bold</item>
         <item name="android:textStyle">bold</item>
@@ -136,7 +137,7 @@
     <style name="DashboardWidgetAmount">
         <item name="android:fontFamily">@font/montserrat_semi_bold</item>
         <item name="android:textSize">21sp</item>
-        <item name="android:textColor">@color/newTextColorDark</item>
+        <item name="android:textColor">@color/textColorDark</item>
     </style>
 
     <style name="Launcher" parent="AppTheme">
