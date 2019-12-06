@@ -8,7 +8,6 @@ import com.rcd27.playfm.domain.discover.DiscoverStateMachine
 import com.rcd27.playfm.domain.discover.Refresh
 import com.rcd27.playfm.extensions.exhaustive
 import com.rcd27.playfm.extensions.plusAssign
-import com.rcd27.playfm.navigation.Router
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -17,8 +16,7 @@ import javax.inject.Inject
 class DiscoverPresenter @Inject constructor(
     lifecycle: Lifecycle,
     private val viewBinding: DiscoverViewBinding,
-    private val stateMachine: DiscoverStateMachine,
-    private val router: Router
+    private val stateMachine: DiscoverStateMachine
 ) : LifecycleObserver {
 
     private val cd = CompositeDisposable()

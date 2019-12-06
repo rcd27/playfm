@@ -12,7 +12,6 @@ import com.rcd27.playfm.common.DisplayableItem
 import com.rcd27.playfm.common.RecycleViewAdapter
 import com.rcd27.playfm.common.RecyclerViewItemDecoration
 import com.rcd27.playfm.data.discover.DiscoverItem
-import com.rcd27.playfm.domain.discover.DiscoverAction
 import com.rcd27.playfm.domain.discover.FeedLoaded
 import com.rcd27.playfm.domain.discover.FeedLoadingError
 import com.rcd27.playfm.domain.discover.FeedSortingError
@@ -26,7 +25,6 @@ import javax.inject.Inject
 class DiscoverViewBinding @Inject constructor(
     private val root: View,
     private val errorDisplay: (String, () -> Unit) -> Unit,
-    private val actionListener: (DiscoverAction) -> Unit,
     private val stateListener: BehaviorRelay<DiscoverViewState>,
     private val context: Context // FIXME: move to appropriate class
 ) {
