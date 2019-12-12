@@ -11,12 +11,12 @@ import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
  */
 
 // TODO: для реализации анимаций при смене списка(сортировке), см. AsyncListDifferDelegationAdapter
-class RecycleViewAdapter : ListDelegationAdapter<List<DisplayableItem>>(AdapterDelegatesManager()) {
-    val delegatesManager: AdapterDelegatesManager<List<DisplayableItem>>
+class RecycleViewAdapter : ListDelegationAdapter<List<ViewObject>>(AdapterDelegatesManager()) {
+    val delegatesManager: AdapterDelegatesManager<List<ViewObject>>
         get() = super.delegatesManager
 }
 
 /**
  * Маркер-интерфейс для передачи в делегат [RecycleViewAdapter].
  */
-interface DisplayableItem
+interface ViewObject

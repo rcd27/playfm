@@ -8,16 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.rcd27.playfm.R
-import com.rcd27.playfm.common.DisplayableItem
+import com.rcd27.playfm.common.InnerRecyclerViewItemDecoration
 import com.rcd27.playfm.common.RecycleViewAdapter
-import com.rcd27.playfm.common.RecyclerViewItemDecoration
+import com.rcd27.playfm.common.OuterRecyclerViewItemDecoration
+import com.rcd27.playfm.common.ViewObject
 import com.rcd27.playfm.data.discover.DiscoverItem
-import com.rcd27.playfm.domain.discover.FeedLoaded
-import com.rcd27.playfm.domain.discover.FeedLoadingError
-import com.rcd27.playfm.domain.discover.FeedSortingError
-import com.rcd27.playfm.domain.discover.FeedState
-import com.rcd27.playfm.domain.discover.FeedsLoading
+import com.rcd27.playfm.data.discover.Recording
+import com.rcd27.playfm.domain.discover.*
 import com.rcd27.playfm.extensions.exhaustive
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_discover_recording.view.*
 import kotlinx.android.synthetic.main.item_discover_slider.view.*
 import javax.inject.Inject
 
@@ -31,40 +31,68 @@ class DiscoverViewBinding @Inject constructor(
 
     private val feedRecyclerView = root.findViewById<RecyclerView>(R.id.feedRecyclerView)
 
-    private val adapter = RecycleViewAdapter()
-    private val slider = adapterDelegateLayoutContainer<DiscoverItem, DisplayableItem>(
+    private val discoverListAdapter = RecycleViewAdapter()
+    private val trendingRecordingsAdapter = RecycleViewAdapter()
+
+    private val recording = adapterDelegateLayoutContainer<Recording, ViewObject>(
+        R.layout.item_discover_recording
+    ) {
+        bind {
+            Picasso.get()
+                // TODO: add placeholder, and placeholder for error
+                .load(item.teaserUrl)
+                .into(containerView.recordingTeaserImageView)
+
+            containerView.recordingTrackName.text = item.shortText
+        }
+    }
+
+    private val slider = adapterDelegateLayoutContainer<DiscoverItem, ViewObject>(
         R.layout.item_discover_slider
     ) {
         bind {
             val header = containerView.sliderHeader
-            header.text = item.shortText
+            header.text = item.header
+
+            containerView.sliderRecyclerView.apply {
+                this.adapter = trendingRecordingsAdapter
+                addItemDecoration(InnerRecyclerViewItemDecoration)
+            }
+
+            trendingRecordingsAdapter.delegatesManager
+                .addDelegate(recording)
         }
     }
 
     init {
         // FIXME: выяснить, почему не хочет принимать MaterialButton
-        adapter.delegatesManager
+        discoverListAdapter.delegatesManager
             .addDelegate(slider)
 
         feedRecyclerView.apply {
-            addItemDecoration(RecyclerViewItemDecoration)
+            addItemDecoration(OuterRecyclerViewItemDecoration)
+            // FIXME: add tag layoutManager in xml to remove this line
             this.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            this.adapter = this@DiscoverViewBinding.adapter
+            this.adapter = this@DiscoverViewBinding.discoverListAdapter
         }
     }
 
-    fun render(state: FeedState) {
+    fun render(state: DiscoverState) {
         when (state) {
-            is FeedsLoading -> {
+            is TrendingLoading -> {
                 stateListener.accept(DiscoverViewState.Loading)
             }
-            is FeedLoaded -> {
-                val feeds = state.feeds
-                adapter.items = feeds
-                adapter.notifyDataSetChanged()
-                stateListener.accept(DiscoverViewState.Loaded)
+            is TrendingLoaded -> {
+                // FIXME: hardcode
+                discoverListAdapter.items = listOf(DiscoverItem("Trending"))
+                discoverListAdapter.notifyDataSetChanged()
+
+                trendingRecordingsAdapter.items = state.trendingRecordings
+                trendingRecordingsAdapter.notifyDataSetChanged()
+
+                stateListener.accept(DiscoverViewState.TrendingLoaded)
             }
-            is FeedLoadingError -> {
+            is TrendingLoadError -> {
                 errorDisplay(state.throwable.message ?: TODO("handle this")) {
                     // nothing
                 }
@@ -80,6 +108,6 @@ class DiscoverViewBinding @Inject constructor(
 
 sealed class DiscoverViewState {
     object Loading : DiscoverViewState()
-    object Loaded : DiscoverViewState()
+    object TrendingLoaded : DiscoverViewState()
     object Error : DiscoverViewState()
 }

@@ -10,41 +10,47 @@
         style="@style/HeaderText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@+id/sliderRecyclerView"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Trending" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/sliderViewPager"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sliderRecyclerView"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/sliderNextButton"
-        app:layout_constraintStart_toEndOf="@id/sliderPrevButton"
-        app:layout_constraintTop_toBottomOf="@id/sliderHeader" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sliderHeader"
+        tools:listitem="@layout/item_discover_recording" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/sliderPrevButton"
         style="@style/Widget.AppCompat.Light.ActionButton.Overflow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:background="@color/calmTurquoiseLight"
         android:src="@drawable/ic_046_left_chevron"
-        app:layout_constraintBottom_toBottomOf="@id/sliderViewPager"
-        app:layout_constraintEnd_toStartOf="@id/sliderViewPager"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/sliderViewPager" />
+        app:layout_constraintTop_toTopOf="@id/sliderRecyclerView" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/sliderNextButton"
         style="@style/Widget.AppCompat.Light.ActionButton.Overflow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:background="@color/calmTurquoiseLight"
         android:elevation="@dimen/global_elevation"
         android:src="@drawable/ic_047_right_chevron"
-        app:layout_constraintBottom_toBottomOf="@id/sliderViewPager"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/sliderViewPager"
-        app:layout_constraintTop_toTopOf="@id/sliderViewPager" />
+        app:layout_constraintTop_toTopOf="@id/sliderRecyclerView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

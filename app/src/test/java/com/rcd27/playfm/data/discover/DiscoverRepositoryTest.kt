@@ -18,7 +18,7 @@ class DiscoverRepositoryTest {
 
     @Test
     fun `Repository returns list of posts`() {
-        val testObserver: TestObserver<List<DiscoverItem>> = TestObserver.create()
+        val testObserver: TestObserver<List<Recording>> = TestObserver.create()
 
         discoverRepository.getTrendingRecordings()
                 .subscribe(testObserver)

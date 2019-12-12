@@ -2,14 +2,14 @@ package com.rcd27.playfm.domain.discover
 
 import android.annotation.SuppressLint
 import com.jakewharton.rxrelay2.BehaviorRelay
-import com.rcd27.playfm.data.discover.DiscoverItem
+import com.rcd27.playfm.data.discover.Recording
 import com.rcd27.playfm.data.discover.DiscoverRepository
 import javax.inject.Inject
 
 /** State machine that is responsible for managing Discover screen */
 class DiscoverStateMachine @Inject constructor(private val repository: DiscoverRepository) {
 
-    val state: BehaviorRelay<FeedState> = BehaviorRelay.create()
+    val state: BehaviorRelay<DiscoverState> = BehaviorRelay.create()
 
     fun input(action: DiscoverAction) {
         when (action) {
@@ -23,11 +23,11 @@ class DiscoverStateMachine @Inject constructor(private val repository: DiscoverR
     private fun refresh() {
         // TODO: provide one Composite Disposable in Presenter layer, which will be managed there
         repository.getTrendingRecordings()
-            .doOnSubscribe { state.accept(FeedsLoading) }
+            .doOnSubscribe { state.accept(TrendingLoading) }
             .subscribe({ posts ->
-                state.accept(FeedLoaded(posts))
+                state.accept(TrendingLoaded(posts))
             }, { error ->
-                state.accept(FeedLoadingError(error))
+                state.accept(TrendingLoadError(error))
             })
     }
 }
@@ -35,8 +35,8 @@ class DiscoverStateMachine @Inject constructor(private val repository: DiscoverR
 sealed class DiscoverAction
 object Refresh : DiscoverAction()
 
-sealed class FeedState
-object FeedsLoading : FeedState()
-data class FeedLoaded(val feeds: List<DiscoverItem>) : FeedState()
-data class FeedLoadingError(val throwable: Throwable) : FeedState()
-data class FeedSortingError(val throwable: Throwable) : FeedState()
+sealed class DiscoverState
+object TrendingLoading : DiscoverState()
+data class TrendingLoaded(val trendingRecordings: List<Recording>) : DiscoverState()
+data class TrendingLoadError(val throwable: Throwable) : DiscoverState()
+data class FeedSortingError(val throwable: Throwable) : DiscoverState()

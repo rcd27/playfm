@@ -8,12 +8,12 @@ import javax.inject.Inject
 class DiscoverRepository @Inject constructor(private val api: DiscoverApi) {
 
     // TODO: попробовать запилить через Consumer. Поля в классе - ататат
-    private var currentPosts: List<DiscoverItem> = emptyList()
+    private var currentPosts: List<Recording> = emptyList()
 
     /**
      * Get 1 page of 12 trending recordings which are sorted by [com.rcd27.playfm.api.discover.JSONRecording.id]
      */
-    fun getTrendingRecordings(): Single<List<DiscoverItem>> {
+    fun getTrendingRecordings(): Single<List<Recording>> {
         return if (currentPosts.isEmpty()) {
             api.getTrending(
                 mapOf(
@@ -29,7 +29,7 @@ class DiscoverRepository @Inject constructor(private val api: DiscoverApi) {
                 .flatMapObservable { response -> fromIterable(response) }
                 // Mapping JSON object to ViewObject here in order to fix API changes only
                 // in mapping functions, but whole app.
-                .map<DiscoverItem>(DiscoverItem.fromJSON())
+                .map<Recording>(Recording.fromJSON())
                 .toList()
                 .map { posts ->
                     currentPosts = posts

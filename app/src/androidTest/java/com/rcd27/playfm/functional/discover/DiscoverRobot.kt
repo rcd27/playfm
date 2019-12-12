@@ -34,5 +34,5 @@ class DiscoverRobot(testRule: ActivityScenarioRule<MainActivity>) {
         get() = stateVerifier.assertNextState(DiscoverViewState.Loading)
 
     val assertFeedsLoaded
-        get() = stateVerifier.assertNextState(DiscoverViewState.Loaded)
+        get() = stateVerifier.assertNextState(DiscoverViewState.TrendingLoaded)
 }
