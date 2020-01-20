@@ -11,7 +11,7 @@ class DiscoverRepositoryTest {
 
     private val discoverRepository = DiscoverRepository(
             AppRobolectricTestRunner
-                    .pikabuTestcaseApp()
+                    .testCaseApp()
                     .applicationComponent
                     .discoverApi
     )

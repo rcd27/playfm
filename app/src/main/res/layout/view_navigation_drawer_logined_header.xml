@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/headerLogo"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/ic_profile"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/headerNameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/textColorDark"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/headerLogo"
+            app:layout_constraintTop_toTopOf="@id/headerLogo"
+            tools:text="Иван Иванов" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/textColorDarkWithOpacity"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/headerLogo"
+            app:layout_constraintStart_toStartOf="@id/headerNameTextView"
+            tools:text="Классный парень" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/exit"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <!-- TODO: TextView supports imageLeft or kinda. Try it out instead of standalone ImageView-->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/ic_exit_to_app_black_24dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="14dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@string/exit"
+            android:textColor="@color/textColorDark"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="@color/calmTurquoiseWithOpacity"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center_vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:text="@string/menu"
+        android:textColor="@color/textColorDarkWithOpacity"
+        android:textSize="12sp" />
+</LinearLayout>

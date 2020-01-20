@@ -17,7 +17,6 @@
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:contentDescription="@string/recording_teaser_image"
-            android:src="@drawable/teaser"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

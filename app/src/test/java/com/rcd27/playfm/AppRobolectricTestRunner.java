@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 /**
@@ -58,6 +59,7 @@ public class AppRobolectricTestRunner extends RobolectricTestRunner {
   }
 
   @NonNull
-  public static void pikabuTestcaseApp() {
+  public static App testCaseApp() {
+    return (App) RuntimeEnvironment.application;
   }
 }

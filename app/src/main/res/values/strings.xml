@@ -3,4 +3,9 @@
 
     <!-- Main screen -->
     <string name="discover">Discover</string>
+    <string name="open_menu">Open menu</string>
+    <string name="close_menu">Close menu</string>
+    <string name="exit">Exit</string>
+    <string name="menu">Menu</string>
+    <string name="log_in">Log in…</string>
 </resources>
