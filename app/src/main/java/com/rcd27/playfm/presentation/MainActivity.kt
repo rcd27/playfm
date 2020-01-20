@@ -10,6 +10,8 @@ import com.rcd27.playfm.App
 import com.rcd27.playfm.R
 import com.rcd27.playfm.dagger.main.ActivityComponent
 import com.rcd27.playfm.dagger.main.ActivityModule
+import com.rcd27.playfm.domain.auth.LogIned
+import com.rcd27.playfm.domain.auth.NotLogIned
 import com.rcd27.playfm.extensions.hideKeyboard
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.properties.Delegates
@@ -69,8 +71,28 @@ class MainActivity : AppCompatActivity() {
                 syncState()
             }
 
-        // TODO: handle two states: `logined`, `not logined`
-        navView.inflateMenu(R.menu.nav_drawer_menu_not_logined)
+        activityComponent.authStateMachine.state.subscribe({ authState ->
+            when (authState) {
+                is LogIned -> {
+                    TODO("handle")
+                }
+                is NotLogIned -> {
+                    navView.inflateMenu(R.menu.nav_drawer_menu_not_logined)
+                }
+            }
+        }, {
+
+        })
+
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu_log_in -> {
+                    TODO("handle login logic here")
+                }
+            }
+            drawerLayout.closeDrawers()
+            true
+        }
         /*
         navView.addHeaderView(
             layoutInflater.inflate(
