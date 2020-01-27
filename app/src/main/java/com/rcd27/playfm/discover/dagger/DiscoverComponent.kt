@@ -1,8 +1,8 @@
-package com.rcd27.playfm.dagger.main.discover
+package com.rcd27.playfm.discover.dagger
 
 import com.jakewharton.rxrelay2.BehaviorRelay
-import com.rcd27.playfm.presentation.discover.DiscoverFragment
-import com.rcd27.playfm.presentation.discover.DiscoverViewState
+import com.rcd27.playfm.discover.presentation.DiscoverFragment
+import com.rcd27.playfm.discover.presentation.DiscoverViewState
 import dagger.Subcomponent
 
 @Subcomponent(

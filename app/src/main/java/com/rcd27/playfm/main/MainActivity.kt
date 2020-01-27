@@ -1,4 +1,4 @@
-package com.rcd27.playfm.presentation
+package com.rcd27.playfm.main
 
 import android.os.Bundle
 import android.view.View
@@ -8,26 +8,30 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.rcd27.playfm.App
 import com.rcd27.playfm.R
-import com.rcd27.playfm.dagger.main.ActivityComponent
-import com.rcd27.playfm.dagger.main.ActivityModule
-import com.rcd27.playfm.domain.auth.LogIned
-import com.rcd27.playfm.domain.auth.NotLogIned
+import com.rcd27.playfm.auth.domain.Logined
+import com.rcd27.playfm.auth.domain.NotLogined
 import com.rcd27.playfm.extensions.hideKeyboard
+import com.rcd27.playfm.extensions.plusAssign
+import com.rcd27.playfm.main.dagger.ActivityComponent
+import com.rcd27.playfm.main.dagger.ActivityModule
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
+    private val cd = CompositeDisposable()
+
     var activityComponent: ActivityComponent by Delegates.notNull()
 
     private val showError: (errorMessage: String, onDismiss: () -> Unit) -> Unit =
         { errorMessage, action ->
             val builder = AlertDialog.Builder(this@MainActivity)
-            builder.setTitle("Unexpected error")
+            builder.setTitle(getString(R.string.err_common_err_title))
                 .setMessage(errorMessage)
                 .setIcon(R.drawable.ic_error_red_24dp)
                 .setCancelable(false)
                 .setNegativeButton(
-                    "That's a shame"
+                    getString(R.string.err_thats_shame)
                 ) { dialog, _ ->
                     action.invoke()
                     dialog.cancel()
@@ -51,7 +55,12 @@ class MainActivity : AppCompatActivity() {
 
         activityComponent = (application as App)
             .applicationComponent
-            .plus(ActivityModule(navController, errorDisplay = showError))
+            .plus(
+                ActivityModule(
+                    navController,
+                    errorDisplay = showError
+                )
+            )
 
         object : ActionBarDrawerToggle(
             this,
@@ -71,23 +80,21 @@ class MainActivity : AppCompatActivity() {
                 syncState()
             }
 
-        activityComponent.authStateMachine.state.subscribe({ authState ->
+        cd += activityComponent.authStateMachine.state.subscribe({ authState ->
             when (authState) {
-                is LogIned -> {
-                    TODO("handle")
+                is Logined -> {
+                    // TODO: inflate proper menu here
                 }
-                is NotLogIned -> {
+                is NotLogined -> {
                     navView.inflateMenu(R.menu.nav_drawer_menu_not_logined)
                 }
             }
-        }, {
-
-        })
+        }, { showError(getString(R.string.err_auth_state_check)) { Unit } })
 
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_log_in -> {
-                    TODO("handle login logic here")
+                    showError(getString(R.string.err_not_implemented)) { Unit }
                 }
             }
             drawerLayout.closeDrawers()
@@ -101,5 +108,10 @@ class MainActivity : AppCompatActivity() {
             )
         )
          */
+    }
+
+    override fun onDestroy() {
+        cd.clear()
+        super.onDestroy()
     }
 }

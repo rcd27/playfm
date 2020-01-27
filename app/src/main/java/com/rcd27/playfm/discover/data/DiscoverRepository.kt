@@ -1,6 +1,6 @@
-package com.rcd27.playfm.data.discover
+package com.rcd27.playfm.discover.data
 
-import com.rcd27.playfm.api.discover.DiscoverApi
+import com.rcd27.playfm.discover.api.DiscoverApi
 import io.reactivex.Observable.fromIterable
 import io.reactivex.Single
 import javax.inject.Inject
@@ -11,7 +11,7 @@ class DiscoverRepository @Inject constructor(private val api: DiscoverApi) {
     private var currentPosts: List<Recording> = emptyList()
 
     /**
-     * Get 1 page of 12 trending recordings which are sorted by [com.rcd27.playfm.api.discover.JSONRecording.id]
+     * Get 1 page of 12 trending recordings which are sorted by [com.rcd27.playfm.discover.api.JSONRecording]
      */
     fun getTrendingRecordings(): Single<List<Recording>> {
         return if (currentPosts.isEmpty()) {

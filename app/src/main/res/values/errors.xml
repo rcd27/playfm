@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--TODO: figure out if this `err` prefix really needed-->
+<resources>
+    <string name="err_auth_state_check">Error checking auth state</string>
+    <string name="err_not_implemented">Not handled yet, stay tuned</string>
+    <string name="err_common_err_title">Unexpected error</string>
+    <string name="err_thats_shame">That\'s a shame</string>
+</resources>

@@ -1,4 +1,4 @@
-package com.rcd27.playfm.data.discover
+package com.rcd27.playfm.discover.data
 
 import com.rcd27.playfm.common.ViewObject
 

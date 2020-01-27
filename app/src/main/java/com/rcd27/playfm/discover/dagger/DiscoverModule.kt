@@ -1,11 +1,10 @@
-package com.rcd27.playfm.dagger.main.discover
+package com.rcd27.playfm.discover.dagger
 
 import android.view.View
 import androidx.lifecycle.Lifecycle
 import com.jakewharton.rxrelay2.BehaviorRelay
-import com.rcd27.playfm.domain.auth.AuthStateMachine
-import com.rcd27.playfm.domain.discover.DiscoverAction
-import com.rcd27.playfm.presentation.discover.DiscoverViewState
+import com.rcd27.playfm.discover.domain.DiscoverAction
+import com.rcd27.playfm.discover.presentation.DiscoverViewState
 import dagger.Module
 import dagger.Provides
 
@@ -29,7 +28,4 @@ class DiscoverModule(
 
     @Provides
     fun stateListener(): BehaviorRelay<DiscoverViewState> = viewStateListener
-
-    @Provides
-    fun authStateMachine(): AuthStateMachine = AuthStateMachine()
 }

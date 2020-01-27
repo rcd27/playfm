@@ -1,9 +1,8 @@
-package com.rcd27.playfm.dagger
+package com.rcd27.playfm
 
 import android.content.Context
-import com.rcd27.playfm.BuildConfig
-import com.rcd27.playfm.api.discover.DiscoverApi
-import com.rcd27.playfm.api.post.PostApi
+import com.rcd27.playfm.auth.domain.AuthStateMachine
+import com.rcd27.playfm.discover.api.DiscoverApi
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -13,6 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
+import javax.inject.Singleton
 
 @Module
 class ApplicationModule @Inject constructor(private val appContext: Context) {
@@ -22,16 +22,13 @@ class ApplicationModule @Inject constructor(private val appContext: Context) {
     fun appContext(): Context = appContext
 
     @Provides
+    @Singleton
     fun feedApi(retrofit: Retrofit): DiscoverApi {
         return retrofit.create(DiscoverApi::class.java)
     }
 
     @Provides
-    fun postApi(retrofit: Retrofit): PostApi {
-        return retrofit.create(PostApi::class.java)
-    }
-
-    @Provides
+    @Singleton
     fun okhttpClient(): OkHttpClient {
         return OkHttpClient
             .Builder()
@@ -48,6 +45,7 @@ class ApplicationModule @Inject constructor(private val appContext: Context) {
     }
 
     @Provides
+    @Singleton
     fun retrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.API_URL)
@@ -56,4 +54,9 @@ class ApplicationModule @Inject constructor(private val appContext: Context) {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun authStateMachine(): AuthStateMachine =
+        AuthStateMachine()
 }

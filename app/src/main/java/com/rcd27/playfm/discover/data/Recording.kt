@@ -1,6 +1,6 @@
-package com.rcd27.playfm.data.discover
+package com.rcd27.playfm.discover.data
 
-import com.rcd27.playfm.api.discover.JSONRecording
+import com.rcd27.playfm.discover.api.JSONRecording
 import com.rcd27.playfm.common.ViewObject
 import io.reactivex.functions.Function
 import org.threeten.bp.ZonedDateTime

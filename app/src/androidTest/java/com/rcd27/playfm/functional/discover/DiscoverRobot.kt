@@ -3,9 +3,9 @@ package com.rcd27.playfm.functional.discover
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.jakewharton.rxrelay2.ReplayRelay
 import com.rcd27.playfm.functional.StateVerifier
-import com.rcd27.playfm.presentation.MainActivity
-import com.rcd27.playfm.presentation.discover.DiscoverFragment
-import com.rcd27.playfm.presentation.discover.DiscoverViewState
+import com.rcd27.playfm.main.MainActivity
+import com.rcd27.playfm.discover.presentation.DiscoverFragment
+import com.rcd27.playfm.discover.presentation.DiscoverViewState
 
 class DiscoverRobot(testRule: ActivityScenarioRule<MainActivity>) {
 

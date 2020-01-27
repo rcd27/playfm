@@ -1,4 +1,4 @@
-package com.rcd27.playfm.dagger.main
+package com.rcd27.playfm.main.dagger
 
 import androidx.navigation.NavController
 import com.rcd27.playfm.navigation.AppDestinationChangeListener

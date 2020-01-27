@@ -1,8 +1,8 @@
-package com.rcd27.playfm.dagger.main
+package com.rcd27.playfm.main.dagger
 
-import com.rcd27.playfm.dagger.main.discover.DiscoverComponent
-import com.rcd27.playfm.dagger.main.discover.DiscoverModule
-import com.rcd27.playfm.domain.auth.AuthStateMachine
+import com.rcd27.playfm.discover.dagger.DiscoverComponent
+import com.rcd27.playfm.discover.dagger.DiscoverModule
+import com.rcd27.playfm.auth.domain.AuthStateMachine
 import com.rcd27.playfm.navigation.AppDestinationChangeListener
 import dagger.Subcomponent
 

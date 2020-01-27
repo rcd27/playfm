@@ -2,9 +2,6 @@ package com.rcd27.playfm
 
 import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen
-import com.rcd27.playfm.dagger.ApplicationComponent
-import com.rcd27.playfm.dagger.ApplicationModule
-import com.rcd27.playfm.dagger.DaggerApplicationComponent
 
 open class App : Application() {
 
@@ -24,6 +21,10 @@ open class App : Application() {
      */
     protected open fun prepareApplicationComponent(): DaggerApplicationComponent.Builder {
         return DaggerApplicationComponent.builder()
-            .applicationModule(ApplicationModule(applicationContext))
+            .applicationModule(
+                ApplicationModule(
+                    applicationContext
+                )
+            )
     }
 }

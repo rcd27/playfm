@@ -1,4 +1,4 @@
-package com.rcd27.playfm.presentation.discover
+package com.rcd27.playfm.discover.presentation
 
 import android.content.Context
 import android.view.View
@@ -12,9 +12,9 @@ import com.rcd27.playfm.common.InnerRecyclerViewItemDecoration
 import com.rcd27.playfm.common.RecycleViewAdapter
 import com.rcd27.playfm.common.OuterRecyclerViewItemDecoration
 import com.rcd27.playfm.common.ViewObject
-import com.rcd27.playfm.data.discover.DiscoverItem
-import com.rcd27.playfm.data.discover.Recording
-import com.rcd27.playfm.domain.discover.*
+import com.rcd27.playfm.discover.data.DiscoverItem
+import com.rcd27.playfm.discover.data.Recording
+import com.rcd27.playfm.discover.domain.*
 import com.rcd27.playfm.extensions.exhaustive
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_discover_recording.view.*
@@ -84,7 +84,11 @@ class DiscoverViewBinding @Inject constructor(
             }
             is TrendingLoaded -> {
                 // FIXME: hardcode
-                discoverListAdapter.items = listOf(DiscoverItem("Trending"))
+                discoverListAdapter.items = listOf(
+                    DiscoverItem(
+                        "Trending"
+                    )
+                )
                 discoverListAdapter.notifyDataSetChanged()
 
                 trendingRecordingsAdapter.items = state.trendingRecordings

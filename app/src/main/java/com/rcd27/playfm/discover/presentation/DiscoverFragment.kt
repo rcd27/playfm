@@ -1,13 +1,13 @@
-package com.rcd27.playfm.presentation.discover
+package com.rcd27.playfm.discover.presentation
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.rcd27.playfm.R
-import com.rcd27.playfm.dagger.main.discover.DiscoverComponent
-import com.rcd27.playfm.dagger.main.discover.DiscoverModule
-import com.rcd27.playfm.presentation.MainActivity
+import com.rcd27.playfm.discover.dagger.DiscoverComponent
+import com.rcd27.playfm.discover.dagger.DiscoverModule
+import com.rcd27.playfm.main.MainActivity
 import javax.inject.Inject
 import kotlin.properties.Delegates
 

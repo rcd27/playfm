@@ -1,9 +1,9 @@
-package com.rcd27.playfm.domain.discover
+package com.rcd27.playfm.discover.domain
 
 import android.annotation.SuppressLint
 import com.jakewharton.rxrelay2.BehaviorRelay
-import com.rcd27.playfm.data.discover.Recording
-import com.rcd27.playfm.data.discover.DiscoverRepository
+import com.rcd27.playfm.discover.data.Recording
+import com.rcd27.playfm.discover.data.DiscoverRepository
 import javax.inject.Inject
 
 /** State machine that is responsible for managing Discover screen */
@@ -25,9 +25,17 @@ class DiscoverStateMachine @Inject constructor(private val repository: DiscoverR
         repository.getTrendingRecordings()
             .doOnSubscribe { state.accept(TrendingLoading) }
             .subscribe({ posts ->
-                state.accept(TrendingLoaded(posts))
+                state.accept(
+                    TrendingLoaded(
+                        posts
+                    )
+                )
             }, { error ->
-                state.accept(TrendingLoadError(error))
+                state.accept(
+                    TrendingLoadError(
+                        error
+                    )
+                )
             })
     }
 }

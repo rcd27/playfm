@@ -1,11 +1,11 @@
-package com.rcd27.playfm.presentation.discover
+package com.rcd27.playfm.discover.presentation
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-import com.rcd27.playfm.domain.discover.DiscoverAction
-import com.rcd27.playfm.domain.discover.DiscoverStateMachine
-import com.rcd27.playfm.domain.discover.Refresh
+import com.rcd27.playfm.discover.domain.DiscoverAction
+import com.rcd27.playfm.discover.domain.DiscoverStateMachine
+import com.rcd27.playfm.discover.domain.Refresh
 import com.rcd27.playfm.extensions.exhaustive
 import com.rcd27.playfm.extensions.plusAssign
 import io.reactivex.android.schedulers.AndroidSchedulers

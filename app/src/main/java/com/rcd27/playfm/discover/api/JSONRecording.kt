@@ -1,4 +1,4 @@
-package com.rcd27.playfm.api.discover
+package com.rcd27.playfm.discover.api
 
 data class JSONRecording(
     val audio: String,
