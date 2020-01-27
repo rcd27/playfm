@@ -18,6 +18,17 @@ tasks.withType(JavaCompile::class.java) {
     options.compilerArgs.add("-Adagger.fullBindingGraphValidation=ERROR")
 }
 
+// Run Ktlint before every build
+tasks.register("ktlint") {
+    exec {
+        executable = "../gradlew"
+        args = listOf("ktlintFormat")
+    }
+}
+tasks.getByName("preBuild") {
+    dependsOn("ktlint")
+}
+
 android {
     compileSdkVersion(28)
     defaultConfig {
