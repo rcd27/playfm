@@ -29,7 +29,8 @@ class DiscoverPresenter @Inject constructor(
     fun onCreate() {
         cd += stateMachine.state
             .observeOn(AndroidSchedulers.mainThread())
-            // TODO: handle FeedLoadError
+            // FIXME: такое в теории может бросить OnErrorNotImplementedException,
+            //  лечится глобальным errorHandler для RxJava на уровне Application
             .subscribe(viewBinding::render)
 
         stateMachine.input(Refresh)

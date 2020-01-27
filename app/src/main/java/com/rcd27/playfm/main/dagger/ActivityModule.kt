@@ -5,6 +5,7 @@ import com.rcd27.playfm.navigation.AppDestinationChangeListener
 import com.rcd27.playfm.navigation.Router
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class ActivityModule(
@@ -19,7 +20,7 @@ class ActivityModule(
     @Provides
     fun destinationChangeListener() = AppDestinationChangeListener
 
-    // FIXME: будет/может создавать новый инстанс при каждом инжекте
     @Provides
+    @Singleton
     fun router(): Router = Router(navController, AppDestinationChangeListener)
 }

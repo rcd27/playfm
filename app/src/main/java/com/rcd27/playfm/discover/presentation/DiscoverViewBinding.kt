@@ -3,14 +3,13 @@ package com.rcd27.playfm.discover.presentation
 import android.content.Context
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.rcd27.playfm.R
 import com.rcd27.playfm.common.InnerRecyclerViewItemDecoration
-import com.rcd27.playfm.common.RecycleViewAdapter
 import com.rcd27.playfm.common.OuterRecyclerViewItemDecoration
+import com.rcd27.playfm.common.RecycleViewAdapter
 import com.rcd27.playfm.common.ViewObject
 import com.rcd27.playfm.discover.data.DiscoverItem
 import com.rcd27.playfm.discover.data.Recording
@@ -71,8 +70,6 @@ class DiscoverViewBinding @Inject constructor(
 
         feedRecyclerView.apply {
             addItemDecoration(OuterRecyclerViewItemDecoration)
-            // FIXME: add tag layoutManager in xml to remove this line
-            this.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             this.adapter = this@DiscoverViewBinding.discoverListAdapter
         }
     }
@@ -97,9 +94,7 @@ class DiscoverViewBinding @Inject constructor(
                 stateListener.accept(DiscoverViewState.TrendingLoaded)
             }
             is TrendingLoadError -> {
-                errorDisplay(state.throwable.message ?: TODO("handle this")) {
-                    // nothing
-                }
+                errorDisplay(state.throwable.message ?: TODO("handle this")) { Unit }
                 stateListener.accept(DiscoverViewState.Error)
             }
             is FeedSortingError -> {
