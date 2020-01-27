@@ -1,20 +1,21 @@
-package com.rcd27.playfm.data.discover
+package com.rcd27.playfm.discover
 
+import androidx.test.core.app.ApplicationProvider
 import com.google.common.truth.Truth.assertThat
-import com.rcd27.playfm.AppRobolectricTestRunner
+import com.rcd27.playfm.App
 import com.rcd27.playfm.discover.data.DiscoverRepository
 import com.rcd27.playfm.discover.data.Recording
 import io.reactivex.observers.TestObserver
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 
-@RunWith(AppRobolectricTestRunner::class)
+@RunWith(RobolectricTestRunner::class)
 class DiscoverRepositoryTest {
 
     private val discoverRepository =
         DiscoverRepository(
-            AppRobolectricTestRunner
-                .testCaseApp()
+            ApplicationProvider.getApplicationContext<App>()
                 .applicationComponent
                 .discoverApi
         )
@@ -24,7 +25,7 @@ class DiscoverRepositoryTest {
         val testObserver: TestObserver<List<Recording>> = TestObserver.create()
 
         discoverRepository.getTrendingRecordings()
-                .subscribe(testObserver)
+            .subscribe(testObserver)
 
         testObserver.await()
         testObserver.assertComplete()

@@ -19,11 +19,11 @@ tasks.withType(JavaCompile::class.java) {
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(28)
     defaultConfig {
         applicationId = "com.rcd27.playfm"
         minSdkVersion(21)
-        targetSdkVersion(29)
+        targetSdkVersion(28)
         versionCode = 1
         versionName = "1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -135,8 +135,11 @@ android {
         // Testing
         testImplementation("junit:junit:4.12")
         testImplementation("com.google.truth:truth:1.0")
-        testImplementation("org.robolectric:robolectric:3.1.2")
+        testImplementation("org.robolectric:robolectric:4.3")
         testImplementation("com.google.truth:truth:1.0")
+        testImplementation("androidx.test:core:1.2.0")
+        // we need Dagger in the tests
+        testImplementation("com.google.dagger:dagger:2.25.2")
 
         androidTestImplementation("androidx.test:runner:1.2.0")
         androidTestImplementation("androidx.test:core:1.2.0")

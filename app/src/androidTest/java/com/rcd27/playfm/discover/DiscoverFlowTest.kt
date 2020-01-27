@@ -1,4 +1,4 @@
-package com.rcd27.playfm.functional.discover
+package com.rcd27.playfm.discover
 
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
