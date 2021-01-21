@@ -30,9 +30,6 @@ class DiscoverViewBinding @Inject constructor(
 
     private val feedRecyclerView = root.findViewById<RecyclerView>(R.id.feedRecyclerView)
 
-    private val discoverListAdapter = RecycleViewAdapter()
-    private val trendingRecordingsAdapter = RecycleViewAdapter()
-
     private val recording = adapterDelegateLayoutContainer<Recording, ViewObject>(
         R.layout.item_discover_recording
     ) {
@@ -57,17 +54,13 @@ class DiscoverViewBinding @Inject constructor(
                 this.adapter = trendingRecordingsAdapter
                 addItemDecoration(InnerRecyclerViewItemDecoration)
             }
-
-            trendingRecordingsAdapter.delegatesManager
-                .addDelegate(recording)
         }
     }
 
-    init {
-        // FIXME: выяснить, почему не хочет принимать MaterialButton
-        discoverListAdapter.delegatesManager
-            .addDelegate(slider)
+    private val discoverListAdapter = RecycleViewAdapter(slider)
+    private val trendingRecordingsAdapter = RecycleViewAdapter(recording)
 
+    init {
         feedRecyclerView.apply {
             addItemDecoration(OuterRecyclerViewItemDecoration)
             this.adapter = this@DiscoverViewBinding.discoverListAdapter

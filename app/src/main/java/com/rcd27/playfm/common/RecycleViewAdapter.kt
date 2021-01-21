@@ -1,5 +1,6 @@
 package com.rcd27.playfm.common
 
+import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 
@@ -11,9 +12,19 @@ import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
  */
 
 // TODO: для реализации анимаций при смене списка(сортировке), см. AsyncListDifferDelegationAdapter
-class RecycleViewAdapter : ListDelegationAdapter<List<ViewObject>>(AdapterDelegatesManager()) {
-    val delegatesManager: AdapterDelegatesManager<List<ViewObject>>
-        get() = super.delegatesManager
+class RecycleViewAdapter<T : ViewObject>(vararg items: AdapterDelegate<List<T>>) :
+    ListDelegationAdapter<List<T>>(AdapterDelegatesManager()) {
+
+    init {
+        items.forEach {
+            super.delegatesManager.addDelegate(it)
+        }
+    }
+
+    fun submitList(data: List<T>) {
+        items = data
+        notifyDataSetChanged()
+    }
 }
 
 /**
